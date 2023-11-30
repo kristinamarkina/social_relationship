@@ -44,8 +44,8 @@ class SocialGraph:
     def clear(self):
         self.graph = {}
 
-    def __str__(self):
-        result = "User Relationships:\n"
-        for user, relationships in self.graph.items():
-            result += f"{user}: {', '.join(relationships)}\n"
-        return result
+    def to_json(self):
+        return {
+            "users": [{"name": user} for user in self.graph],
+            "relationships": [{"source": user1, "target": user2} for user1 in self.graph for user2 in self.graph[user1]],
+        }
