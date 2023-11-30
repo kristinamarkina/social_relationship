@@ -27,6 +27,11 @@ class SocialGraph:
         self.graph[user1].add(user2)
         self.graph[user2].add(user1)
 
+    def remove_relationship(self, user1, user2):
+        if user1 in self.graph and user2 in self.graph[user1]:
+            self.graph[user1].remove(user2)
+            self.graph[user2].remove(user1)
+
     def is_empty(self):
         return not bool(self.graph)
 
