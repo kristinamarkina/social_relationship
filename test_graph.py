@@ -26,12 +26,11 @@ class TestSocialGraph(unittest.TestCase):
         self.social_graph.add_user("Alice")
         self.social_graph.add_user("Bob")
         self.social_graph.add_relationship("Alice", "Bob")
-        expected_output = (
-            "User Relationships:\n"
-            "Alice: Bob\n"
-            "Bob: Alice"
-        )
-        self.assertEqual(str(self.social_graph).strip(), expected_output)
+        expected_output = {
+            "users": [{"name": "Alice"}, {"name": "Bob"}],
+            "relationships": [{"source": "Alice", "target": "Bob"}, {"source": "Bob", "target": "Alice"} ],
+        }
+        self.assertEqual(self.social_graph.to_json(), expected_output)
 
     def test_add_relationship_invalid_users(self):
         with self.assertRaises(ValueError):
