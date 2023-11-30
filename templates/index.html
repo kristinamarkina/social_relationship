@@ -44,21 +44,49 @@
     <div>
         <h2>Add User:</h2>
         <form action="/add_user" method="post">
-            <label for="user">User:</label>
-            <input type="text" id="user" name="user" required>
+            <label for="userToAdd">User:</label>
+            <input type="text" id="userToAdd" name="user" required>
             <button type="submit">Add User</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Remove User:</h2>
+        <form action="/remove_user" method="post">
+            <label for="userToRemove">User:</label>
+            <input type="text" id="userToRemove" name="user" required>
+            <button type="submit">Remove User</button>
         </form>
     </div>
 
     <div>
         <h2>Add Relationship:</h2>
         <form action="/add_relationship" method="post">
-            <label for="user1">User 1:</label>
-            <input type="text" id="user1" name="user1" required>
-            <label for="user2">User 2:</label>
-            <input type="text" id="user2" name="user2" required>
+            <label for="userToAdd1">User 1:</label>
+            <input type="text" id="userToAdd1" name="user1" required>
+            <label for="userToAdd2">User 2:</label>
+            <input type="text" id="userToAdd2" name="user2" required>
             <button type="submit">Add Relationship</button>
         </form>
     </div>
+
+    <div>
+        <h2>Remove Relationship:</h2>
+        <form action="/remove_relationship" method="post">
+            <label for="userToRemove1">User 1:</label>
+            <input type="text" id="userToRemove1" name="user1" required>
+            <label for="userToRemove2">User 2:</label>
+            <input type="text" id="userToRemove2" name="user2" required>
+            <button type="submit">Remove Relationship</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Clear Graph</h2>
+        <form action="/clear" method="post">
+            <button type="submit">Clear</button>
+        </form>
+    </div>
+
 </body>
 </html>
