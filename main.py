@@ -16,7 +16,7 @@ def main():
     social_graph1.add_relationship("Alice", "Bob")
 
     # Print the graph before clearing
-    print(f"Graph 1 after creation: {social_graph1}")
+    print(f"Graph 1 after creation: {social_graph1.to_json()}")
 
     # Check if the graph is empty after adding users and relationships
     print(f"Is the graph empty? {social_graph1.is_empty()}")  # Should print: Is the graph empty? False
@@ -32,21 +32,21 @@ def main():
     # Test removing a user
     social_graph1.remove_user("Alice")
 
-    # Check if the two graphs are equal after alterating graph1
-    print(f"Are the two graphs equal after alterating graph1? {social_graph1 == social_graph2}")  # Should print: Are the two graphs equal? True
+    # Check if the two graphs are equal after altering graph1
+    print(f"Are the two graphs equal after altering graph1? {social_graph1 == social_graph2}")  # Should print: Are the two graphs equal? True
 
     # Check if the graph is empty after removing users
     print(
         f"Is the graph empty? {social_graph1.is_empty()}")  # Should print: Is the graph empty? False (if there are remaining users)
 
     # Print the graph before clearing
-    print(f"Graph before clearing: {social_graph1}")
+    print(f"Graph before clearing: {social_graph1.to_json()}")
 
     # Clear the graph
     social_graph1.clear()
 
     # Print the graph after clearing
-    print(f"Graph after clearing: {social_graph1}")  # Should print: Graph after clearing: {}
+    print(f"Graph after clearing: {social_graph1.to_json()}")  # Should print: Graph after clearing: {"users": [], "relationships": []}
 
 
 if __name__ == "__main__":
