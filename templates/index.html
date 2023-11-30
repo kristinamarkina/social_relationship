@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Relationship Graph</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h2 {
+            color: #555;
+        }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        pre {
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+        }
+
+        form {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Social Relationship Graph</h1>
+
+    <div>
+        <h2>Graph:</h2>
+        <pre>{{ graph }}</pre>
+    </div>
+
+    <div>
+        <h2>Add User:</h2>
+        <form action="/add_user" method="post">
+            <label for="user">User:</label>
+            <input type="text" id="user" name="user" required>
+            <button type="submit">Add User</button>
+        </form>
+    </div>
+
+    <div>
+        <h2>Add Relationship:</h2>
+        <form action="/add_relationship" method="post">
+            <label for="user1">User 1:</label>
+            <input type="text" id="user1" name="user1" required>
+            <label for="user2">User 2:</label>
+            <input type="text" id="user2" name="user2" required>
+            <button type="submit">Add Relationship</button>
+        </form>
+    </div>
+</body>
+</html>
