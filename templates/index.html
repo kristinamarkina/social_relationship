@@ -12,6 +12,14 @@
 
         h1 {
             color: #333;
+            text-align: center;
+        }
+
+        .grid{
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 2.5%;
+            width: 100%;
         }
 
         h2 {
@@ -20,6 +28,12 @@
 
         div {
             margin-bottom: 20px;
+            width: max-content;
+        }
+
+        #graph{
+            width: auto;
+            justify-self: stretch;
         }
 
         pre {
@@ -36,57 +50,68 @@
 <body>
     <h1>Social Relationship Graph</h1>
 
-    <div>
-        <h2>Graph:</h2>
-        <pre>{{ graph }}</pre>
-    </div>
+    <div class="grid">
+        <!-- column 1/form -->
+        <div >
+            <div>
+                <h2>Add User:</h2>
+                <form action="/add_user" method="post">
+                    <label for="userToAdd">User:</label>
+                    <input type="text" id="userToAdd" name="user" required>
+                    <button type="submit">Add User</button>
+                </form>
+            </div>
 
-    <div>
-        <h2>Add User:</h2>
-        <form action="/add_user" method="post">
-            <label for="userToAdd">User:</label>
-            <input type="text" id="userToAdd" name="user" required>
-            <button type="submit">Add User</button>
-        </form>
-    </div>
+            <div>
+                <h2>Remove User:</h2>
+                <form action="/remove_user" method="post">
+                    <label for="userToRemove">User:</label>
+                    <input type="text" id="userToRemove" name="user" required>
+                    <button type="submit">Remove User</button>
+                </form>
+            </div>
 
-    <div>
-        <h2>Remove User:</h2>
-        <form action="/remove_user" method="post">
-            <label for="userToRemove">User:</label>
-            <input type="text" id="userToRemove" name="user" required>
-            <button type="submit">Remove User</button>
-        </form>
-    </div>
+            <div>
+                <h2>Add Relationship:</h2>
+                <form action="/add_relationship" method="post">
+                    <label for="userToAdd1">User 1:</label>
+                    <input type="text" id="userToAdd1" name="user1" required>
+                    <label for="userToAdd2">User 2:</label>
+                    <input type="text" id="userToAdd2" name="user2" required>
+                    <button type="submit">Add Relationship</button>
+                </form>
+            </div>
 
-    <div>
-        <h2>Add Relationship:</h2>
-        <form action="/add_relationship" method="post">
-            <label for="userToAdd1">User 1:</label>
-            <input type="text" id="userToAdd1" name="user1" required>
-            <label for="userToAdd2">User 2:</label>
-            <input type="text" id="userToAdd2" name="user2" required>
-            <button type="submit">Add Relationship</button>
-        </form>
-    </div>
+            <div>
+                <h2>Remove Relationship:</h2>
+                <form action="/remove_relationship" method="post">
+                    <label for="userToRemove1">User 1:</label>
+                    <input type="text" id="userToRemove1" name="user1" required>
+                    <label for="userToRemove2">User 2:</label>
+                    <input type="text" id="userToRemove2" name="user2" required>
+                    <button type="submit">Remove Relationship</button>
+                </form>
+            </div>
 
-    <div>
-        <h2>Remove Relationship:</h2>
-        <form action="/remove_relationship" method="post">
-            <label for="userToRemove1">User 1:</label>
-            <input type="text" id="userToRemove1" name="user1" required>
-            <label for="userToRemove2">User 2:</label>
-            <input type="text" id="userToRemove2" name="user2" required>
-            <button type="submit">Remove Relationship</button>
-        </form>
-    </div>
+            <div>
+                <h2>Clear Graph</h2>
+                <form action="/clear" method="post">
+                    <button type="submit">Clear</button>
+                </form>
+            </div>
+        </div>
 
-    <div>
-        <h2>Clear Graph</h2>
-        <form action="/clear" method="post">
-            <button type="submit">Clear</button>
-        </form>
+        <!-- column 2 grid display -->
+        <div>
+            <div id="graph">
+                <h2>Graph:</h2>
+                <pre>{{ graph }}</pre>
+            </div>
+            <div>
+                <h2>Adjacency Matrix: </h2>
+                <pre>{{ matrix }}</pre>
+            </div>
+        </div>
     </div>
-
 </body>
 </html>
