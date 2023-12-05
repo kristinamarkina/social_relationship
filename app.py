@@ -5,9 +5,12 @@ from graph import SocialGraph
 app = Flask(__name__)
 social_graph = SocialGraph()
 
+
 @app.route("/")
 def index():
-    return render_template("index.html", graph=social_graph.to_json())
+    return render_template("index.html", graph=social_graph.to_json(),
+                           matrix=social_graph.generate_matrix(str_=True))
+
 
 @app.route("/add_user", methods=["POST"])
 def add_user():
@@ -18,7 +21,9 @@ def add_user():
     except ValueError as e:
         message = str(e)
 
-    return render_template("index.html", graph=social_graph.to_json(), message=message)
+    return render_template("index.html", graph=social_graph.to_json(),
+                           matrix=social_graph.generate_matrix(str_=True), message=message)
+
 
 @app.route("/remove_user", methods=["POST"])
 def remove_user():
@@ -29,7 +34,9 @@ def remove_user():
     except ValueError as e:
         message = str(e)
 
-    return render_template("index.html", graph=social_graph.to_json(), message=message)
+    return render_template("index.html", graph=social_graph.to_json(),
+                           matrix=social_graph.generate_matrix(str_=True), message=message)
+
 
 @app.route("/add_relationship", methods=["POST"])
 def add_relationship():
@@ -41,7 +48,9 @@ def add_relationship():
     except ValueError as e:
         message = str(e)
 
-    return render_template("index.html", graph=social_graph.to_json(), message=message)
+    return render_template("index.html", graph=social_graph.to_json(),
+                           matrix=social_graph.generate_matrix(str_=True), message=message)
+
 
 @app.route("/remove_relationship", methods=["POST"])
 def remove_relationship():
@@ -53,17 +62,22 @@ def remove_relationship():
     except ValueError as e:
         message = str(e)
 
-    return render_template("index.html", graph=social_graph.to_json(), message=message)
+    return render_template("index.html", graph=social_graph.to_json(),
+                           matrix=social_graph.generate_matrix(str_=True), message=message)
+
 
 @app.route("/clear", methods=["POST"])
 def clear():
     social_graph.clear()
     message = "Graph cleared successfully."
-    return render_template("index.html", graph=social_graph.to_json(), message=message)
+    return render_template("index.html", graph=social_graph.to_json(),
+                           matrix=social_graph.generate_matrix(str_=True), message=message)
+
 
 @app.route("/graph_json")
 def get_graph_json():
     return jsonify(social_graph.to_json())
+
 
 if __name__ == "__main__":
     app.run(debug=True)

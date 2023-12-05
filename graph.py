@@ -1,3 +1,9 @@
+import copy
+import json
+import numpy as np
+from pandas import DataFrame
+
+
 class SocialGraph:
     def __init__(self):
         self.graph = {}
@@ -32,6 +38,26 @@ class SocialGraph:
             self.graph[user1].remove(user2)
             self.graph[user2].remove(user1)
 
+    def generate_matrix(self, str_=False):
+        # create dataframe filled with 0's
+        # columns and rows named with users names
+        matrix = DataFrame({user: np.zeros(len(self), dtype=int) for user in self.graph},
+                           index=[user for user in self.graph])
+
+        # add 1's in appropriate cells to signify a connection
+        for user in self.graph:
+            for user1 in self.graph[user]:
+                matrix[user][user1] = 1
+
+        # return matrix
+        if matrix.empty and str_:
+            return '[]'
+
+        if str_:
+            return str(matrix)
+
+        return matrix
+
     def is_empty(self):
         return not bool(self.graph)
 
@@ -45,7 +71,13 @@ class SocialGraph:
         self.graph = {}
 
     def to_json(self):
-        return {
-            "users": [{"name": user} for user in self.graph],
-            "relationships": [{"source": user1, "target": user2} for user1 in self.graph for user2 in self.graph[user1]],
-        }
+        # copy graph so changes can be made
+        graph = copy.deepcopy(self.graph)
+
+        # add a label for the relationships to the copy graph
+        for user in graph:
+            graph[user] = {'relationships': list(self.graph[user])}
+        return json.dumps(graph, indent=4)
+
+    def __str__(self):
+        return self.graph
