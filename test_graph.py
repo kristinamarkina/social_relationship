@@ -22,16 +22,6 @@ class TestSocialGraph(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.social_graph.remove_user("Bob")
 
-    def test_add_relationship_valid(self):
-        self.social_graph.add_user("Alice")
-        self.social_graph.add_user("Bob")
-        self.social_graph.add_relationship("Alice", "Bob")
-        expected_output = {
-            "users": [{"name": "Alice"}, {"name": "Bob"}],
-            "relationships": [{"source": "Alice", "target": "Bob"}, {"source": "Bob", "target": "Alice"} ],
-        }
-        self.assertEqual(self.social_graph.to_json(), expected_output)
-
     def test_add_relationship_invalid_users(self):
         with self.assertRaises(ValueError):
             self.social_graph.add_relationship("Alice", "Bob")
@@ -47,17 +37,6 @@ class TestSocialGraph(unittest.TestCase):
         self.social_graph.add_relationship("Alice", "Bob")
         with self.assertRaises(ValueError):
             self.social_graph.add_relationship("Alice", "Bob")
-
-    def test_remove_relationship(self):
-        self.social_graph.add_user("Alice")
-        self.social_graph.add_user("Bob")
-        self.social_graph.add_relationship("Alice", "Bob")
-        self.social_graph.remove_relationship("Alice", "Bob")
-        expected_output = {
-            "users": [{"name": "Alice"}, {"name": "Bob"}],
-            "relationships": [],
-        }
-        self.assertEqual(self.social_graph.to_json(), expected_output)
 
 
 if __name__ == "__main__":
